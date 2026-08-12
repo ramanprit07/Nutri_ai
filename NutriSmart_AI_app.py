@@ -153,18 +153,23 @@ def train_models(df):
     )
 
     # Tune C using only the training data.
-    search = GridSearchCV(
-        estimator=logistic_pipeline,
-        param_grid={"model__C": [0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10]},
-        scoring="f1_weighted",
-        cv=5,
-        n_jobs=-1,
+    # search = GridSearchCV(
+    #     estimator=logistic_pipeline,
+    #     param_grid={"model__C": [0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10]},
+    #     scoring="f1_weighted",
+    #     cv=5,
+    #     n_jobs=-1,
+    # )
+    # search.fit(X_train, y_train)
+
+    # model = search.best_estimator_
+    # model_pred = model.predict(X_test)
+    # Train Logistic Regression directly
+    model = logistic_pipeline.set_params(
+        model__C=1.0
     )
-    search.fit(X_train, y_train)
 
-    model = search.best_estimator_
-    model_pred = model.predict(X_test)
-
+    model.fit(X_train, y_train)
     def metrics(actual, predicted):
         return {
             "Accuracy": accuracy_score(actual, predicted),
