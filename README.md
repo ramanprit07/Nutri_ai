@@ -26,8 +26,7 @@ The application uses a **Logistic Regression predictive model** to analyze user 
 ## ▶️ Run the App
 
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
+https://nutriai.streamlit.app/
 ```
 
 ## 🎯 Goal
